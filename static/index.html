@@ -93,6 +93,7 @@ function renderFrame() {
 }
 
 var drawNext = true;
+
 // Signals that there's something to be drawn
 function drawNextFrame() {
     drawNext = true;
@@ -129,8 +130,12 @@ function getPosition(e) {
 
 function addEntity(entity, data) {
     world[entity] = data;
-    drawNextFrame(); // (but should we?)
+    var dict = {}; dict[entity] = data;
+
     //XXX: Send a XHTML Request that updates the entity you just modified!
+    socket.send(JSON.stringify(dict));
+    
+    drawNextFrame(); // (but should we?)
 }
 
 var counter = 0;
@@ -270,6 +275,7 @@ function wsSetup() {
     var url = "ws://"+host+"/subscribe";   
     socket = new WebSocket(url);
     socket.onopen = function() {
+        debug("Subscribed to Server!");
         //XXX: TODO What are you going to do here?
     };
     socket.onerror = function(msg) {
@@ -279,12 +285,22 @@ function wsSetup() {
         try {
             debug("WebSocket Recv:" + msg.data);
             //XXX: TODO What are you going to do here?            
+
+            let json_data = JSON.parse(msg.data);
+
+            for (let key in json_data) { world[key] = json_data[key] }
+            drawNextFrame();
+            drawFrame();
+
+
         } catch (e) {
             alert("socket on message: " + e);
         }
     }; 
 }
 
+
+debug("Running Setup")
 wsSetup();
 
 
