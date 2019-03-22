@@ -57,3 +57,17 @@ Contributors
 
 * Mark Galloway
 * Abram Hindle
+
+
+Note
+============
+
+
+
+
+Collaborators
+============
+
+Some of the code in sockets come from:
+https://github.com/abramhindle/WebSocketsExamples/blob/master/chat.py
+
