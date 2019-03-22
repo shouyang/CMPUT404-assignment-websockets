@@ -59,9 +59,10 @@ Contributors
 * Abram Hindle
 
 
-Note
+Notes
 ============
-
+The debug text on the page can be quite lengthy when opening the page since the server will send the current world to new incoming connections.
+Please scroll down to find the canvas of the application if you're connecting to a non-blank world which may have many objects present. 
 
 
 
@@ -71,3 +72,4 @@ Collaborators
 Some of the code in sockets come from:
 https://github.com/abramhindle/WebSocketsExamples/blob/master/chat.py
 
+Some of the code in sockets and static come from my assignment 4. Given the nature of this assignment in relation to that one, both share many overlaps.
